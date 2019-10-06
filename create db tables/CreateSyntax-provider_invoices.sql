@@ -5,7 +5,7 @@ CREATE TABLE `provider_invoices` (
   `tracking_code` int(11) NOT NULL,
   `from_country` varchar(2) NOT NULL DEFAULT '',
   `to_country` varchar(2) NOT NULL DEFAULT '',
-  `amount` decimal(6,4) NOT NULL,
+  `amount` decimal(9,6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tracking_code` (`tracking_code`,`from_country`,`to_country`),
   CONSTRAINT `fk_tracking_code` FOREIGN KEY (`tracking_code`) REFERENCES `product_shipments` (`tracking_code`)
