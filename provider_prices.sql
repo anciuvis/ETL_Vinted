@@ -8,7 +8,7 @@ CREATE TEMPORARY TABLE vinted.tmp1 (
   `actual_package_size` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
-LOAD DATA LOCAL INFILE '/Users/anciuvis/Desktop/Vinted/provider_prices/mergedjson' 
+LOAD DATA LOCAL INFILE '/Users/anciuvis/Desktop/Vinted/provider_prices/merged.json' 
 INTO TABLE vinted.tmp1(jsondata)
 
 SET `from_country` = TRIM((jsondata->>'$.from_country')),
