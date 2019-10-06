@@ -8,7 +8,7 @@ CREATE TEMPORARY TABLE vinted.tmp1 (
   `actual_package_size` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
-LOAD DATA LOCAL INFILE '/Users/anciuvis/Desktop/Vinted/provider_prices/part-00000-f9d86808-ca2f-4689-830a-776d12075b6d-c000.json' 
+LOAD DATA LOCAL INFILE '/Users/anciuvis/Desktop/Vinted/provider_prices/mergedjson' 
 INTO TABLE vinted.tmp1(jsondata)
 
 SET `from_country` = TRIM((jsondata->>'$.from_country')),
@@ -18,13 +18,13 @@ SET `from_country` = TRIM((jsondata->>'$.from_country')),
 
 INSERT INTO vinted.provider_prices (`from_country`, `to_country`, `price`, `actual_package_size`)
 SELECT from_country, to_country, price, actual_package_size
-FROM vinted.tmp1 
-WHERE ( from_country, to_country, actual_package_size) NOT IN 
-		( SELECT from_country, to_country, actual_package_size 
+FROM vinted.tmp1
+WHERE ( from_country, to_country, actual_package_size) NOT IN
+		( SELECT from_country, to_country, actual_package_size
 		  FROM vinted.provider_prices
 		);
-		
-UPDATE vinted.provider_prices a 
+
+UPDATE vinted.provider_prices a
 JOIN vinted.tmp1 b ON
 a.from_country = b.from_country AND
 a.to_country = b.to_country AND
