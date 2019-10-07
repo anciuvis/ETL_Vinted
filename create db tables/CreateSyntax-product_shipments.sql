@@ -6,7 +6,7 @@ CREATE TABLE `product_shipments` (
   `from_country` varchar(2) NOT NULL DEFAULT '',
   `to_country` varchar(2) NOT NULL DEFAULT '',
   `package_type_id` int(11) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
+  `transaction_id` int(11) unsigned NOT NULL,
   `shipping_label_created` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tracking_code` (`tracking_code`),
